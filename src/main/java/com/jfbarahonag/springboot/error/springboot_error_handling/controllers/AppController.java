@@ -8,6 +8,8 @@ public class AppController {
   
   @GetMapping("/app")
   public String index() {
+    int val = 1/0;
+    System.out.println(val);
     return "OK 200";
   }
 }
