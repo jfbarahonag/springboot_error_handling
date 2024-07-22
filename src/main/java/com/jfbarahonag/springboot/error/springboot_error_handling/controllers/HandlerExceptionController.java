@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.jfbarahonag.springboot.error.springboot_error_handling.models.Error;
 
@@ -24,5 +25,16 @@ public class HandlerExceptionController {
     return ResponseEntity
         .status(err.getStatusCode())
         .body(err);
+  }
+
+  @ExceptionHandler(NoResourceFoundException.class)
+  public ResponseEntity<Error> notFoundHandler(Exception ex) {
+
+    Error err = new Error();
+    err.setDate(new Date());
+    err.setMessage("Not found: " + ex.getMessage());
+    err.setStatusCode(404);
+
+    return ResponseEntity.status(err.getStatusCode()).body(err);
   }
 }
