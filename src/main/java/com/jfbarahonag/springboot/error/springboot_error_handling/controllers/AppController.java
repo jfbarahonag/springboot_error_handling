@@ -20,7 +20,7 @@ public class AppController {
   }
 
   @GetMapping("users/{id}")
-  public User getUserById(@PathVariable id) {
+  public User getUserById(@PathVariable int id) {
     return null;
   }
 }
