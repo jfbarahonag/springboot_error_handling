@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     return users.stream()
         .filter(u -> u.getId().equals(id))
         .findFirst()
-        .orElse(null);
+        .orElseThrow(null);
   }
 
 }
