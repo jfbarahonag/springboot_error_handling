@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.NotWritablePropertyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,11 +45,23 @@ public class HandlerExceptionController {
 
   @ExceptionHandler(NoResourceFoundException.class)
   public ResponseEntity<Error> notFoundHandler(Exception ex) {
-
     Error err = new Error();
     err.setDate(new Date());
     err.setMessage("Not found: " + ex.getMessage());
     err.setStatusCode(404);
+  
+    return ResponseEntity.status(err.getStatusCode()).body(err);
+  }
+
+  @ExceptionHandler({
+    NullPointerException.class, 
+    NotWritablePropertyException.class 
+  })
+  public ResponseEntity<Error> nullPointerExceptionHandler(Exception ex) {
+    Error err = new Error();
+    err.setDate(new Date());
+    err.setMessage("Not Found: " + ex.getMessage());
+    err.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 
     return ResponseEntity.status(err.getStatusCode()).body(err);
   }
