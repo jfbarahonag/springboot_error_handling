@@ -1,6 +1,5 @@
 package com.jfbarahonag.springboot.error.springboot_error_handling.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +12,11 @@ import com.jfbarahonag.springboot.error.springboot_error_handling.services.UserS
 @RequestMapping("/app")
 public class AppController {
 
-  @Autowired
   private UserService userService;
+
+  public AppController(UserService userService) {
+    this.userService = userService;
+  }
   
   @GetMapping("/test")
   public String index() {
