@@ -31,7 +31,7 @@ public class AppController {
   public User getUserById(@PathVariable Long id) {
     User user = userService.findById(id);
     if (user == null) {
-      throw new UserNotFoundException("User".concat(String.valueOf(id).concat(" not found")));
+      throw new UserNotFoundException("User ".concat(String.valueOf(id).concat(" not found")));
     }
     return user;
   }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import com.jfbarahonag.springboot.error.springboot_error_handling.exceptions.UserNotFoundException;
 import com.jfbarahonag.springboot.error.springboot_error_handling.models.Error;
 
 @RestControllerAdvice
@@ -54,8 +55,8 @@ public class HandlerExceptionController {
   }
 
   @ExceptionHandler({
-    NullPointerException.class, 
-    NotWritablePropertyException.class 
+    NotWritablePropertyException.class,
+    UserNotFoundException.class
   })
   public ResponseEntity<Error> nullPointerExceptionHandler(Exception ex) {
     Error err = new Error();
